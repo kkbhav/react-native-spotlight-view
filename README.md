@@ -1,11 +1,11 @@
 
-# react-native-spotlight-view
+## react-native-spotlight-view [![npm version](https://badge.fury.io/js/react-native-spotlight-view.svg)](http://badge.fury.io/js/react-native-spotlight-view)
 
-## Getting started
+### Getting started
 
 `$ npm install react-native-spotlight-view --save`
 
-###Example 
+### Example 
 
 ![alt text](./example.png?raw=true "Example")
 
