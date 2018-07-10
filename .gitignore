@@ -45,3 +45,4 @@ buck-out/
 *.keystore
 
 package-lock.json
+.idea/*
