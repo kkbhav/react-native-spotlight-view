@@ -8,8 +8,48 @@
 
 ## Usage
 ```javascript
-import RNSpotlightView from 'react-native-spotlight-view';
+import { SpotLight, SpotLightFromRef } from 'react-native-spotlight-view';
 
-// TODO: What to do with the module?
-RNSpotlightView;
+<SpotLight
+  diameter={100}
+  offsetX={100}
+  offsetY={100}
+  visible={true}>
+  <View style={{ flex: 1 }}>
+    {// Add any children here}
+  </View>
+</SpotLight>
+````
+**Or** 
+```javascript
+<SpotLightFromRef
+  viewRef={someViewReference}
+  visible={true}>
+  <View style={{ flex: 1 }}>
+    {// Add any children here}
+  </View>
+</SpotLightFromRef>
 ```
+
+##Supported Props:
+
+###For SpotLight
+
+| Name  | Type     | Description |
+| :---- | :------: | :--- |
+| visible | boolean   | View visibility indicator |
+| opacity | number   | (optional) value between 0 to 1 for background opacity |
+| diameter | number   | diameter of spotlight view |
+| offsetX | number   | offset from center of screen |
+| offsetY | number   |  offset from center of screen |
+
+
+###For SpotLightFromRef
+
+| Name  | Type     | Description |
+| :---- | :------: | :--- |
+| visible | boolean   | View visibility indicator |
+| viewRef | React view   | react view reference to calculate offset |
+| opacity | number   | (optional) value between 0 to 1 for background opacity |
+
+
