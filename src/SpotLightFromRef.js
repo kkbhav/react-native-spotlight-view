@@ -8,6 +8,7 @@ type Props = {
   viewRef: React.ReactNode,
   opacity: number,
   children?: typeof React.Children,
+  diameterOffset?: number,
 };
 type State = {
   spotParams: {
@@ -22,6 +23,10 @@ type State = {
 class SpotLightFromRef extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
+
+    const { width, height } = Dimensions.get('window');
+    this.width = width;
+    this.height = height;
     this.state = {
       spotParams: {
         diameter: 0,
@@ -62,10 +67,20 @@ class SpotLightFromRef extends React.Component<Props, State> {
 
   handleRefChanges(viewRef: React.ReactNode) {
     if (viewRef) {
-      viewRef.measure((frameOffsetX, frameOffsetY, width1, height1, pageOffsetX, pageOffsetY) => {
+      viewRef.measure((frameOffsetX, frameOffsetY, width, height, pageOffsetX, pageOffsetY) => {
+        const centerX = this.width / 2;
+        const centerY = this.height / 2;
+        const offsetX = -(centerX - ((width / 2) + pageOffsetX));
+        const offsetY = -(centerY - ((height / 2) + pageOffsetY));
+
         this.setState({
           visible: this.props.visible,
           viewRef: viewRef,
+          spotParams: {
+            diameter: (width > height) ? (width + this.props.diameterOffset) : (height + this.props.diameterOffset),
+            offsetX,
+            offsetY,
+          }
         });
       });
     }
@@ -81,5 +96,9 @@ class SpotLightFromRef extends React.Component<Props, State> {
     );
   }
 }
+
+SpotLightFromRef.defaultProps = {
+  diameterOffset: 0,
+};
 
 export default SpotLightFromRef;

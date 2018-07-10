@@ -49,7 +49,14 @@ import { SpotLight, SpotLightFromRef } from 'react-native-spotlight-view';
 | Name  | Type     | Description |
 | :---- | :------: | :--- |
 | visible | boolean   | View visibility indicator |
+| diameterOffset | number   | increase or decrease calculated diameter by this value |
 | viewRef | React view   | react view reference to calculate offset |
 | opacity | number   | (optional) value between 0 to 1 for background opacity |
+
+
+## TroubleShooting
+
+1. If on android using SpotLightFromRef, the spotlight is not showing then please ensure that on the reference view collapsible property is false  
+  i.e. collapsable={false}
 
 
