@@ -5,6 +5,10 @@
 
 `$ npm install react-native-spotlight-view --save`
 
+###Example 
+
+![alt text](./example.png?raw=true "Example")
+
 
 ## Usage
 ```javascript
