@@ -1,0 +1,39 @@
+{
+  "name": "react-native-spotlight-view",
+  "version": "1.0.0",
+  "description": "Spotlight view for react native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "spotlight",
+    "react",
+    "view"
+  ],
+  "author": {
+    "name": "Bhavesh Khandelwal",
+    "email": "bhav.khandelwal@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kkbhav/react-native-spotlight-view.git"
+  },
+  "homepage": "https://github.com/kkbhav/react-native-spotlight-view",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react-native": "^0.41.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.17.0",
+    "eslint-plugin-flowtype": "^2.46.2",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-react": "^7.6.1",
+    "eslint-plugin-react-native": "^3.2.0",
+    "flow-bin": "^0.69.0",
+    "react-native": "^0.41.2"
+  }
+}
