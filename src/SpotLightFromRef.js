@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Dimensions } from 'react-native';
 import SpotLightOverlay from './SpotLightOverlay';
 
 type Props = {
@@ -8,7 +8,9 @@ type Props = {
   viewRef: React.ReactNode,
   opacity: number,
   children?: typeof React.Children,
+  renderCircle?: (style: {}) => any,
   diameterOffset?: number,
+  onRequestClose: () => void,
 };
 type State = {
   spotParams: {
@@ -65,23 +67,26 @@ class SpotLightFromRef extends React.Component<Props, State> {
     }
   }
 
-  handleRefChanges(viewRef: React.ReactNode) {
+  handleRefChanges(viewRef: React.ReactNode, repeatValue?: number = 0) {
     if (viewRef) {
       viewRef.measure((frameOffsetX, frameOffsetY, width, height, pageOffsetX, pageOffsetY) => {
-        const centerX = this.width / 2;
-        const centerY = this.height / 2;
-        const offsetX = -(centerX - ((width / 2) + pageOffsetX));
-        const offsetY = -(centerY - ((height / 2) + pageOffsetY));
-
-        this.setState({
-          visible: this.props.visible,
-          viewRef: viewRef,
-          spotParams: {
-            diameter: (width > height) ? (width + this.props.diameterOffset) : (height + this.props.diameterOffset),
-            offsetX,
-            offsetY,
-          }
-        });
+        if (width > 0 || height > 0) {
+          const centerX = this.width / 2;
+          const centerY = this.height / 2;
+          const offsetX = Math.round(-(centerX - ((width / 2) + pageOffsetX)));
+          const offsetY = Math.round(-(centerY - ((height / 2) + pageOffsetY)));
+          this.setState({
+            visible: this.props.visible,
+            viewRef: viewRef,
+            spotParams: {
+              diameter: (width > height) ? (width + this.props.diameterOffset) : (height + this.props.diameterOffset),
+              offsetX,
+              offsetY,
+            }
+          });
+        } else if (width === 0 && height === 0 && repeatValue < 1) {
+          setTimeout(() => this.handleRefChanges(viewRef, repeatValue + 1), 1000);
+        }
       });
     }
   }
@@ -98,7 +103,7 @@ class SpotLightFromRef extends React.Component<Props, State> {
 }
 
 SpotLightFromRef.defaultProps = {
-  diameterOffset: 0,
+  diameterOffset: 10,
 };
 
 export default SpotLightFromRef;

@@ -37,21 +37,27 @@ import { SpotLight, SpotLightFromRef } from 'react-native-spotlight-view';
 
 | Name  | Type     | Description |
 | :---- | :------: | :--- |
+| duration | number   | (optional)animation duration to show or hide in ms |
 | visible | boolean   | View visibility indicator |
 | opacity | number   | (optional) value between 0 to 1 for background opacity |
 | diameter | number   | diameter of spotlight view |
 | offsetX | number   | offset from center of screen |
 | offsetY | number   |  offset from center of screen |
+| renderCircle | function(style)   |  (optional)function to render inner circle of spotlight |
+| onRequestClose | function()   |  (optional)called when hardware back button is pressed on android |
 
 
 ###For SpotLightFromRef
 
 | Name  | Type     | Description |
 | :---- | :------: | :--- |
+| duration | number   | (optional)animation duration to show or hide in ms |
 | visible | boolean   | View visibility indicator |
-| diameterOffset | number   | increase or decrease calculated diameter by this value |
+| diameterOffset | number   | (optional)increase or decrease calculated diameter by this value |
 | viewRef | React view   | react view reference to calculate offset |
 | opacity | number   | (optional) value between 0 to 1 for background opacity |
+| renderCircle | function(style)   |  (optional)function to render inner circle of spotlight |
+| onRequestClose | function()   |  (optional)called when hardware back button is pressed on android |
 
 
 ## TroubleShooting
