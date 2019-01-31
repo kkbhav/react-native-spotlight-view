@@ -27,41 +27,51 @@ import { SpotLight, SpotLightFromRef } from 'react-native-spotlight-view';
 **Or** 
 ```javascript
 <SpotLightFromRef
+  ref={ref => this.spotLightRef = ref}
   viewRef={someViewReference}
   visible={true}>
   <View style={{ flex: 1 }}>
     {// Add any children here}
   </View>
 </SpotLightFromRef>
+
+// Method for SpotLightFromRef
+this.spotLightRef.setViewReference(someViewReference);
 ```
 
-##Supported Props:
+###Supported Props:
 
-###For SpotLight
+####For SpotLight
 
 | Name  | Type     | Description |
 | :---- | :------: | :--- |
-| duration | number   | (optional)animation duration to show or hide in ms |
 | visible | boolean   | View visibility indicator |
-| opacity | number   | (optional) value between 0 to 1 for background opacity |
 | diameter | number   | diameter of spotlight view |
 | offsetX | number   | offset from center of screen |
 | offsetY | number   |  offset from center of screen |
+| opacity | number   | (optional) value between 0 to 1 for background opacity |
+| duration | number   | (optional)animation duration to show or hide in ms |
+| circleImage | number or { uri: string }   | (optional) image for circle |
 | renderCircle | function(style)   |  (optional)function to render inner circle of spotlight |
 | onRequestClose | function()   |  (optional)called when hardware back button is pressed on android |
 
 
-###For SpotLightFromRef
+####For SpotLightFromRef
 
 | Name  | Type     | Description |
 | :---- | :------: | :--- |
-| duration | number   | (optional)animation duration to show or hide in ms |
 | visible | boolean   | View visibility indicator |
-| diameterOffset | number   | (optional)increase or decrease calculated diameter by this value |
 | viewRef | React view   | react view reference to calculate offset |
+| diameterOffset | number   | (optional)increase or decrease calculated diameter by this value |
+| circleImage | number or { uri: string }   |  (optional)image for circle |
 | opacity | number   | (optional) value between 0 to 1 for background opacity |
+| duration | number   | (optional)animation duration to show or hide in ms |
 | renderCircle | function(style)   |  (optional)function to render inner circle of spotlight |
 | onRequestClose | function()   |  (optional)called when hardware back button is pressed on android |
+
+**Methods for SpotLightFromRef**
+
+=> setViewReference(anyViewRef);
 
 
 ## TroubleShooting

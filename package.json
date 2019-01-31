@@ -1,6 +1,6 @@
 {
   "name": "react-native-spotlight-view",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Spotlight view for react native",
   "main": "index.js",
   "scripts": {

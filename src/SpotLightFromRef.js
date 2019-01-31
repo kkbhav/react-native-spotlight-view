@@ -11,6 +11,7 @@ type Props = {
   renderCircle?: (style: {}) => any,
   diameterOffset?: number,
   onRequestClose: () => void,
+  circleImage: number | { uri: string },
 };
 type State = {
   spotParams: {
@@ -19,13 +20,15 @@ type State = {
     offsetY: number,
   },
   visible: boolean,
-  viewRef: React.ReactNode,
 };
 
 class SpotLightFromRef extends React.Component<Props, State> {
+  viewRef: any;
+
   constructor(props: Props) {
     super(props);
 
+    this.viewRef = null;
     const { width, height } = Dimensions.get('window');
     this.width = width;
     this.height = height;
@@ -36,35 +39,22 @@ class SpotLightFromRef extends React.Component<Props, State> {
         offsetY: 0,
       },
       visible: false,
-      viewRef: null,
     };
   }
 
   componentDidMount() {
-    this.handleRefChanges(this.props.viewRef);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (!React.version || React.version.localeCompare('16.3') < 0) {
-      if (nextProps.viewRef !== this.props.viewRef) {
-        this.setState({ visible: false });
-      }
-    }
-  }
-
-  static getDerivedStateFromProps(nextProps: Props, prevState: State) {
-    if (React.version && React.version.localeCompare('16.3') >= 0) {
-      if (nextProps.viewRef !== prevState.viewRef) {
-        return { visible: false };
-      }
-    }
-    return null;
+    this.setViewReference(this.props.viewRef);
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    if (prevProps.viewRef !== this.props.viewRef) {
-      this.handleRefChanges(this.props.viewRef);
+    if (this.viewRef !== this.props.viewRef) {
+      this.setViewReference(this.props.viewRef);
     }
+  }
+
+  setViewReference(viewRef: any) {
+    this.viewRef = viewRef;
+    this.handleRefChanges(this.viewRef);
   }
 
   handleRefChanges(viewRef: React.ReactNode, repeatValue?: number = 0) {
@@ -77,7 +67,6 @@ class SpotLightFromRef extends React.Component<Props, State> {
           const offsetY = Math.round(-(centerY - ((height / 2) + pageOffsetY)));
           this.setState({
             visible: this.props.visible,
-            viewRef: viewRef,
             spotParams: {
               diameter: (width > height) ? (width + this.props.diameterOffset) : (height + this.props.diameterOffset),
               offsetX,
@@ -92,12 +81,12 @@ class SpotLightFromRef extends React.Component<Props, State> {
   }
 
   render() {
-    const { viewRef, ...props } = this.props;
+    const { viewRef, visible, ...props } = this.props;
     return (
       <SpotLightOverlay
         {...props}
         {...this.state.spotParams}
-        visible={this.state.visible}/>
+        visible={this.state.visible && visible}/>
     );
   }
 }
